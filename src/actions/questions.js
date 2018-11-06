@@ -28,14 +28,12 @@ export function handleAddQuestion(question) {
 }
 
 // ADD ANSWER
-function addAnswer(authedUser, qid, answer) {
+function addAnswer({authedUser, qid, answer}) {
     return {
         type: ADD_ANSWER,
-        action: {
-            authedUser,
-            qid,
-            answer
-        }
+        authedUser,
+        qid,
+        answer
     }
 }
 

@@ -16,7 +16,6 @@ class App extends Component {
             this.props.dispatch(setAuthenticatedUser('sarahedo'));
         }, 1000);
 
-
         setTimeout(() => {
             this.props.dispatch(handleAddQuestion({
                 optionOneText: 'test1',
@@ -29,7 +28,7 @@ class App extends Component {
             this.props.dispatch(handleAddAnswer({
                 authedUser: 'sarahedo',
                 qid: '8xf0y6ziyjabvozdd253nd',
-                answer: 'optionOne'
+                answer: 'optionTwo'
             }))
         }, 3000);
 

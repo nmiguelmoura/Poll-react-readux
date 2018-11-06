@@ -16,8 +16,14 @@ export default function questions(state = {}, action) {
             };
 
         case ADD_ANSWER:
-            console.log(action);
-            return state;
+            const updatedQuestion = state[action.qid];
+            const currentVotes = updatedQuestion[action.answer].votes;
+            updatedQuestion[action.answer].votes = [...currentVotes, action.authedUser];
+
+            return {
+                ...state,
+                [action.qid]: updatedQuestion
+            };
 
         default:
             return state;
