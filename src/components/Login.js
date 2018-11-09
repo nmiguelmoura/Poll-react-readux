@@ -1,12 +1,34 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { setAuthenticatedUser } from '../actions/authedUser';
 
 class Login extends Component {
+
+    state = {
+        selectedUser: ''
+    };
+
+    onLogin = (event) => {
+        event.preventDefault();
+
+        if(this.state.selectedUser) {
+            this.props.dispatch(setAuthenticatedUser(this.state.selectedUser));
+        }
+    };
+
+    onChange = (event) => {
+        const selectedUser = event.target.value;
+
+        this.setState(prev => ({
+            selectedUser
+        }))
+    };
+
     render() {
-        console.log(this.props.users);
         return (
             <div>
-                <select>
+                <select value={this.state.selectedUser} onChange={this.onChange}>
+                    <option value='' disabled>Select a user</option>
                     {this.props.users.map(user => (
                         <option
                             key={user.id}
@@ -15,6 +37,9 @@ class Login extends Component {
                         </option>
                     ))}
                 </select>
+                <button onClick={this.onLogin}>
+                    Submit
+                </button>
             </div>
         );
     }
