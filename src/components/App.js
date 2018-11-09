@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import { handleInitialData } from "../actions/shared";
 import { handleAddQuestion, handleAddAnswer } from "../actions/questions";
 import { setAuthenticatedUser } from "../actions/authedUser";
-import Login from "./Login";
+import Login from './Login';
+import List from './List';
 
 class App extends Component {
     componentDidMount() {
@@ -41,7 +42,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Login/>
+                <List/>
             </div>
         );
     }
