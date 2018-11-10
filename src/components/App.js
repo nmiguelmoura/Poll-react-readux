@@ -13,7 +13,7 @@ class App extends Component {
 
 
 
-        //TESTINNG AREA
+        // //TESTINNG AREA
         setTimeout(() => {
             this.props.dispatch(setAuthenticatedUser('sarahedo'));
         }, 1000);

@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_ANSWER } from '../actions/questions';
+import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_ANSWER, REVERT_ANSWER } from '../actions/questions';
 
 export default function questions(state = {}, action) {
     switch(action.type) {
@@ -23,6 +23,14 @@ export default function questions(state = {}, action) {
             return {
                 ...state,
                 [action.qid]: updatedQuestion
+            };
+
+        case REVERT_ANSWER:
+            const questionToRevert = state[action.qid];
+            questionToRevert[action.answer].votes.filter(userId => userId !== action.authedUser);
+            return {
+                ...state,
+                [action.qid]: questionToRevert
             };
 
         default:

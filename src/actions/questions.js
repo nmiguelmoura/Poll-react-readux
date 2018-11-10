@@ -2,6 +2,7 @@ import * as API from '../utils/data';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_ANSWER = 'ADD_ANSWER';
+export const REVERT_ANSWER = 'REVERT_ANSWER';
 
 // RECEIVE QUESTIONS
 export function receiveQuestions(questions) {
@@ -37,10 +38,35 @@ function addAnswer({authedUser, qid, answer}) {
     }
 }
 
-export function handleAddAnswer(authedUser, qid, answer) {
+export function handleAddAnswer({ authedUser, qid, answer }) {
     return (dispatch) => {
-        API._saveQuestionAnswer(authedUser, qid, answer)
-            .then(() => dispatch(addAnswer(authedUser, qid, answer)))
-            .catch(e => console.log(e));
+        dispatch(addAnswer({
+            authedUser,
+            qid,
+            answer}));
+
+        API._saveQuestionAnswer({
+            authedUser,
+            qid,
+            answer
+        })
+            .catch(() => {
+                //TODO: alert message here
+
+                dispatch(revertAnswer({
+                    authedUser,
+                    qid,
+                    answer
+                }))
+            })
+    }
+}
+
+function revertAnswer({ authedUser, qid, answer }) {
+    return {
+        type: REVERT_ANSWER,
+        authedUser,
+        qid,
+        answer
     }
 }
