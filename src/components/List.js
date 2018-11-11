@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ANSWERED, UNANSWERED} from "../res/texts";
-import QuestionUnanswered from './QuestionUnanswered';
-import { handleAddAnswer } from "../actions/questions";
+import ListedQuestion from "./ListedQuestion";
+import { prepareQuestionForList } from "../utils/helpers";
 
 class List extends Component {
     state = {
         showAlreadyAnswered: false
     };
 
-    answerQuestion = (qid, answer) => {
-        this.props.dispatch(handleAddAnswer({
-            authedUser: this.props.authedUser,
-            qid,
-            answer
-        }));
+    pollClick = () => {
+        //TODO: REDIRECT TO POLL
+        console.log('go to poll');
     };
 
     toggleView = () => {
@@ -34,13 +31,11 @@ class List extends Component {
                         if (question.alreadyAnswered === this.state.showAlreadyAnswered) {
                             return (
                                 <li key={question.id}>
-                                    {this.state.alreadyAnswered
-                                        ? question.id
-                                        : <QuestionUnanswered
-                                            question={question}
-                                            onAnswer={this.answerQuestion}
-                                        />
-                                    }
+                                    <ListedQuestion
+                                        question={question}
+                                        user={this.props.users[question.author]}
+                                        onPollClick={this.pollClick}
+                                    />
                                 </li>
                             );
                         }
@@ -52,22 +47,17 @@ class List extends Component {
     }
 }
 
-function mapStateToProps({questions, authedUser}) {
+function mapStateToProps({questions, authedUser, users}) {
     questions = Object.getOwnPropertyNames(questions)
     .map(questionId => {
         let question = questions[questionId];
-        question.alreadyAnswered =
-            question.optionOne.votes.find((userId) => userId === authedUser)
-            || question.optionTwo.votes.find((userId) => userId === authedUser)
-                ? true
-                : false;
-
-        return question;
+        return prepareQuestionForList(question, authedUser);
     });
 
     return {
         authedUser,
-        questions
+        questions,
+        users
     }
 }
 

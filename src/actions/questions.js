@@ -1,4 +1,6 @@
 import * as API from '../utils/data';
+import { addUserAnswer, revertUserAnswer } from "./users";
+
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_ANSWER = 'ADD_ANSWER';
@@ -45,6 +47,12 @@ export function handleAddAnswer({ authedUser, qid, answer }) {
             qid,
             answer}));
 
+        dispatch(addUserAnswer({
+            userId: authedUser,
+            qid,
+            answer
+        }));
+
         API._saveQuestionAnswer({
             authedUser,
             qid,
@@ -57,6 +65,11 @@ export function handleAddAnswer({ authedUser, qid, answer }) {
                     authedUser,
                     qid,
                     answer
+                }));
+
+                dispatch(revertUserAnswer({
+                    userId: authedUser,
+                    qid
                 }))
             })
     }
