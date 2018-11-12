@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {ANSWERED, UNANSWERED} from "../res/texts";
 import ListedQuestion from "./ListedQuestion";
-import { prepareQuestionForList } from "../utils/helpers";
+import { prepareQuestion } from "../utils/helpers";
 
 class List extends Component {
     state = {
@@ -51,7 +51,7 @@ function mapStateToProps({questions, authedUser, users}) {
     questions = Object.getOwnPropertyNames(questions)
     .map(questionId => {
         let question = questions[questionId];
-        return prepareQuestionForList(question, authedUser);
+        return prepareQuestion(question, authedUser);
     });
 
     return {

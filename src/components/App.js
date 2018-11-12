@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { handleInitialData } from "../actions/shared";
 import { handleAddQuestion, handleAddAnswer } from "../actions/questions";
 import { setAuthenticatedUser } from "../actions/authedUser";
-import List from './List';
+import Question from './Question';
 
 class App extends Component {
     componentDidMount() {
@@ -39,9 +39,13 @@ class App extends Component {
     }
 
     render() {
+        const match = {
+            id: '6ni6ok3ym7mf1p33lnez'
+        };
+
         return (
             <div>
-                <List/>
+                <Question match={match}/>
             </div>
         );
     }

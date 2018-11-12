@@ -1,4 +1,4 @@
-const checkIfAnswered = (question, authedUser) => {
+export const checkIfAnswered = (question, authedUser) => {
     return question.optionOne.votes.find((userId) => userId === authedUser)
         || question.optionTwo.votes.find((userId) => userId === authedUser)
             ? true
@@ -6,7 +6,7 @@ const checkIfAnswered = (question, authedUser) => {
 
 };
 
-const getPollResults = (optionOneAnswers, optionTwoAnswers) => {
+export const getPollResults = (optionOneAnswers, optionTwoAnswers) => {
     let optionOnePercentage = 0,
         optionTwoPercentage = 0;
 
@@ -22,7 +22,7 @@ const getPollResults = (optionOneAnswers, optionTwoAnswers) => {
     };
 };
 
-export const prepareQuestionForList = (question, authedUser) => {
+export const prepareQuestion = (question, authedUser) => {
     question.alreadyAnswered = checkIfAnswered(question, authedUser);
 
     const pollResults = getPollResults(question.optionOne.votes.length, question.optionTwo.votes.length);
