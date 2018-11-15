@@ -1,5 +1,5 @@
 import * as API from '../utils/data';
-import { addUserAnswer, revertUserAnswer } from "./users";
+import {addUserAnswer, addUserQuestion, revertUserAnswer} from "./users";
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
@@ -25,7 +25,10 @@ function addQuestion(question) {
 export function handleAddQuestion(question) {
     return (dispatch) => {
         API._saveQuestion(question)
-            .then(formattedQuestion => dispatch(addQuestion(formattedQuestion)))
+            .then(formattedQuestion => {
+                dispatch(addQuestion(formattedQuestion));
+                dispatch(addUserQuestion(formattedQuestion));
+            })
             .catch(e => console.log(e));
     }
 }

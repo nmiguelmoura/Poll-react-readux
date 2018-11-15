@@ -1,4 +1,10 @@
-import { RECEIVE_USERS, ADD_USER_ANSWER, REVERT_USER_ANSWER } from '../actions/users';
+import {
+    RECEIVE_USERS,
+    ADD_USER_ANSWER,
+    REVERT_USER_ANSWER,
+    ADD_USER_QUESTION,
+    REVERT_USER_QUESTION
+} from '../actions/users';
 
 export default function users(state = {}, action) {
     switch (action.type) {
@@ -23,6 +29,22 @@ export default function users(state = {}, action) {
             return {
                 ...state,
                 [action.userId]: userToRevert
+            };
+
+        case ADD_USER_QUESTION:
+            const userToUpdateQuestion = state[action.userId];
+            userToUpdateQuestion.questions = [...userToUpdateQuestion.questions, action.id];
+            return {
+                ...state,
+                userToUpdateQuestion
+            };
+
+        case REVERT_USER_QUESTION:
+            const userToRevertQuestion = state[action.userId];
+            userToRevertQuestion.questions.filter(question => question.id !== action.id);
+            return {
+                ...state,
+                userToRevertQuestion
             };
 
         default:
