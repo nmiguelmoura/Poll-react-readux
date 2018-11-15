@@ -12,7 +12,7 @@ export const getPollResults = (optionOneAnswers, optionTwoAnswers) => {
 
     if(optionOneAnswers + optionTwoAnswers > 0) {
         optionOnePercentage = Math.round((optionOneAnswers * 1000) / (optionOneAnswers + optionTwoAnswers)) / 10;
-        optionTwoPercentage = Math.round(optionOnePercentage * 10) / 10;
+        optionTwoPercentage = Math.round((100 - optionOnePercentage) * 10) / 10;
     }
 
 

@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import { handleInitialData } from "../actions/shared";
 import { handleAddQuestion, handleAddAnswer } from "../actions/questions";
 import { setAuthenticatedUser } from "../actions/authedUser";
-import Question from './Question';
+// import Question from './Question';
+import Ranking from './Ranking';
 
 class App extends Component {
     componentDidMount() {
@@ -32,20 +33,16 @@ class App extends Component {
                 answer: 'optionTwo'
             }))
         }, 3000);
-
-
-
-
     }
 
     render() {
-        const match = {
-            id: '6ni6ok3ym7mf1p33lnez'
-        };
+        // const match = {
+        //     id: 'xj352vofupe1dqz9emx13r'
+        // };
 
         return (
             <div>
-                <Question match={match}/>
+                <Ranking />
             </div>
         );
     }

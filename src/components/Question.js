@@ -26,9 +26,6 @@ class Question extends Component {
         let userAnswer;
         if(question.alreadyAnswered) {
             const user = this.props.users[this.props.authedUser];
-            console.log("#######");
-            console.log(this.props.authedUser);
-            console.log(user);
             userAnswer = user.answers[qid];
         }
 
@@ -58,7 +55,7 @@ class Question extends Component {
                         </div>
                         <div>
                             <p>{question.optionTwo.Text}</p>
-                            <p>{question.optionOne.percentage}</p>
+                            <p>{question.optionTwo.percentage}</p>
                         </div>
                     </div>
                 )}
@@ -66,25 +63,6 @@ class Question extends Component {
         );
     }
 }
-
-//
-// const Question = (props) => {
-//     const {question} = props;
-//     return (
-//         <div>
-//             <button onClick={() => {
-//                 props.onAnswer(question.id, QUESTION_OPTIONS.OPTION_ONE)
-//             }}>
-//                 {question.optionOne.text}
-//             </button>
-//             <button onClick={() => {
-//                 props.onAnswer(question.id, QUESTION_OPTIONS.OPTION_TWO)
-//             }}>
-//                 {question.optionTwo.text}
-//             </button>
-//         </div>
-//     );
-// };
 
 function mapStateToProps({authedUser, questions, users}, props) {
     return {
