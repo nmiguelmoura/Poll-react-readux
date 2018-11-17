@@ -9,9 +9,10 @@ class List extends Component {
         showAlreadyAnswered: false
     };
 
-    pollClick = () => {
+    pollClick = (id) => {
         //TODO: REDIRECT TO POLL
-        console.log('go to poll');
+        console.log(id);
+        this.props.history.push(`/question/${id}`);
     };
 
     toggleView = () => {

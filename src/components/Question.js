@@ -14,7 +14,8 @@ class Question extends Component {
     };
 
     render() {
-        const qid = this.props.match.id;
+        const qid = this.props.match.params.id;
+
         let question = this.props.questions[qid];
 
         if(!question) {
@@ -64,8 +65,9 @@ class Question extends Component {
     }
 }
 
-function mapStateToProps({authedUser, questions, users}, props) {
+function mapStateToProps({loading, authedUser, questions, users}, props) {
     return {
+        loading,
         authedUser,
         questions,
         users,

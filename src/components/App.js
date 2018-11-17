@@ -1,39 +1,23 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { handleInitialData } from "../actions/shared";
-import { handleAddQuestion, handleAddAnswer } from "../actions/questions";
-import { setAuthenticatedUser } from "../actions/authedUser";
-// import Question from './Question';
+import { removeAuthenticatedUser } from "../actions/authedUser";
+import Header from './Header';
+import Login from './Login';
+import List from './List';
+import NewQuestion from './NewQuestion';
+import Question from './Question';
 import Ranking from './Ranking';
 
 class App extends Component {
     componentDidMount() {
         this.props.dispatch(handleInitialData());
-
-
-
-
-        // //TESTINNG AREA
-        setTimeout(() => {
-            this.props.dispatch(setAuthenticatedUser('sarahedo'));
-        }, 1000);
-
-        setTimeout(() => {
-            this.props.dispatch(handleAddQuestion({
-                optionOneText: 'test1',
-                optionTwoText: 'test2',
-                author: 'sarahedo'
-            }))
-        }, 2000);
-
-        setTimeout(() => {
-            this.props.dispatch(handleAddAnswer({
-                authedUser: 'sarahedo',
-                qid: 'xj352vofupe1dqz9emx13r',
-                answer: 'optionTwo'
-            }))
-        }, 3000);
     }
+
+    logout = () => {
+        this.props.dispatch(removeAuthenticatedUser());
+    };
 
     render() {
         // const match = {
@@ -41,9 +25,16 @@ class App extends Component {
         // };
 
         return (
-            <div>
-                <Ranking />
-            </div>
+            <Router>
+                <Fragment>
+                    <Header onLogout={this.logout}/>
+                    <Route exact path='/' component={List} />
+                    <Route path='/login' component={Login} />
+                    <Route path='/new' component={NewQuestion} />
+                    <Route path='/question/:id' component={Question} />
+                    <Route path='/ranking' component={Ranking} />
+                </Fragment>
+            </Router>
         );
     }
 }

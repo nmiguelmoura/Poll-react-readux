@@ -2,6 +2,7 @@ import React from 'react';
 
 const ListedQuestion = (props) => {
     const {question, user} = props;
+
     return (
         <div>
             <div>
@@ -19,7 +20,7 @@ const ListedQuestion = (props) => {
                 </div>
             </div>
             <div>
-                <button onClick={props.onPollClick}>View Poll</button>
+                <button onClick={() => props.onPollClick(question.id)}>View Poll</button>
             </div>
         </div>
     );
