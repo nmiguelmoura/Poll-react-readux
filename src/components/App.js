@@ -8,6 +8,7 @@ import List from './List';
 import NewQuestion from './NewQuestion';
 import Question from './Question';
 import Ranking from './Ranking';
+import 'bootstrap/dist/css/bootstrap-grid.css';
 
 class App extends Component {
     componentDidMount() {
