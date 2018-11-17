@@ -36,7 +36,7 @@ export default function users(state = {}, action) {
             userToUpdateQuestion.questions = [...userToUpdateQuestion.questions, action.id];
             return {
                 ...state,
-                userToUpdateQuestion
+                [userToUpdateQuestion.id]: userToUpdateQuestion
             };
 
         case REVERT_USER_QUESTION:
