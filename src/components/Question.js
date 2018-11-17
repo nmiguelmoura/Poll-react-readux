@@ -3,8 +3,29 @@ import {connect} from 'react-redux';
 import {QUESTION_OPTIONS} from "../utils/constants";
 import {prepareQuestion} from "../utils/helpers";
 import { handleAddAnswer } from "../actions/questions";
+import {Redirect} from "react-router-dom";
 
 class Question extends Component {
+    state = {
+        forceLogin: false
+    };
+
+    componentDidMount() {
+        this.checkIfLoginNeeded(this.props.authedUser);
+    }
+
+    componentWillReceiveProps(props) {
+        this.checkIfLoginNeeded(props.authedUser);
+    }
+
+    checkIfLoginNeeded(authedUser) {
+        if(!authedUser) {
+            this.setState(prev => ({
+                forceLogin: true
+            }));
+        }
+    }
+
     onAnswer = (qid, answer) => {
         this.props.dispatch(handleAddAnswer({
             authedUser: this.props.authedUser,
@@ -14,6 +35,12 @@ class Question extends Component {
     };
 
     render() {
+        if(this.state.forceLogin) {
+            return (
+                <Redirect to='/' />
+            );
+        }
+
         const qid = this.props.match.params.id;
 
         let question = this.props.questions[qid];

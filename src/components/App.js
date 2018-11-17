@@ -1,8 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { handleInitialData } from "../actions/shared";
-import { removeAuthenticatedUser } from "../actions/authedUser";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {handleInitialData} from "../actions/shared";
 import Header from './Header';
 import Login from './Login';
 import List from './List';
@@ -15,28 +14,27 @@ class App extends Component {
         this.props.dispatch(handleInitialData());
     }
 
-    logout = () => {
-        this.props.dispatch(removeAuthenticatedUser());
-    };
-
     render() {
-        // const match = {
-        //     id: 'xj352vofupe1dqz9emx13r'
-        // };
-
         return (
             <Router>
                 <Fragment>
                     <Header onLogout={this.logout}/>
-                    <Route exact path='/' component={List} />
-                    <Route path='/login' component={Login} />
-                    <Route path='/new' component={NewQuestion} />
-                    <Route path='/question/:id' component={Question} />
-                    <Route path='/ranking' component={Ranking} />
+                    <Route exact path='/' component={Login}/>
+                    <Route path='/list' component={List}/>
+                    <Route path='/new' component={NewQuestion}/>
+                    <Route path='/question/:id' component={Question}/>
+                    <Route path='/ranking' component={Ranking}/>
                 </Fragment>
             </Router>
         );
     }
 }
 
-export default connect()(App);
+function mapStateToProps({authedUser}, props) {
+    return {
+        onPageLogin: !authedUser,
+        ...props
+    };
+}
+
+export default connect(mapStateToProps)(App);

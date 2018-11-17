@@ -2,12 +2,30 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {SUBMIT_QUESTION} from "../res/texts";
 import { handleAddQuestion } from "../actions/questions";
+import {Redirect} from "react-router-dom";
 
 class NewQuestion extends Component {
     state = {
+        forceLogin: false,
         optionOne: '',
         optionTwo: ''
     };
+
+    componentDidMount() {
+        this.checkIfLoginNeeded(this.props.authedUser);
+    }
+
+    componentWillReceiveProps(props) {
+        this.checkIfLoginNeeded(props.authedUser);
+    }
+
+    checkIfLoginNeeded(authedUser) {
+        if(!authedUser) {
+            this.setState(prev => ({
+                forceLogin: true
+            }));
+        }
+    }
 
     onChange = (event) => {
         const value = event.target.value;
@@ -25,7 +43,7 @@ class NewQuestion extends Component {
             this.props.dispatch(handleAddQuestion({
                 optionOneText: this.state.optionOne,
                 optionTwoText: this.state.optionTwo,
-                author: this.state.authedUser
+                author: this.props.authedUser
             }));
         } else {
 
@@ -33,6 +51,12 @@ class NewQuestion extends Component {
     };
 
     render() {
+        if(this.state.forceLogin) {
+            return (
+                <Redirect to='/' />
+            );
+        }
+
         return(
             <form>
                 <input

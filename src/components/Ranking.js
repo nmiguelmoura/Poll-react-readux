@@ -1,8 +1,35 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from "react-router-dom";
 
 class Ranking extends Component {
+    state = {
+        forceLogin: false,
+    };
+
+    componentDidMount() {
+        this.checkIfLoginNeeded(this.props.authedUser);
+    }
+
+    componentWillReceiveProps(props) {
+        this.checkIfLoginNeeded(props.authedUser);
+    }
+
+    checkIfLoginNeeded(authedUser) {
+        if(!authedUser) {
+            this.setState(prev => ({
+                forceLogin: true
+            }));
+        }
+    }
+
     render() {
+        if(this.state.forceLogin) {
+            return (
+                <Redirect to='/' />
+            );
+        }
+
         return (
             <div>
                 <h1>LEADERBOARD</h1>

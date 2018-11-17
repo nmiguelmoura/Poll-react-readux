@@ -8,6 +8,12 @@ class Login extends Component {
         selectedUser: ''
     };
 
+    componentWillReceiveProps(props) {
+        if(props.authedUser) {
+            this.props.history.push('/list');
+        }
+    }
+
     onLogin = (event) => {
         event.preventDefault();
 
@@ -45,8 +51,9 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ authedUser, users }) {
     return {
+        authedUser,
         users: Object.getOwnPropertyNames(users)
             .map(user => users[user])
     };

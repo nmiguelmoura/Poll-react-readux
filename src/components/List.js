@@ -1,13 +1,31 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {ANSWERED, UNANSWERED} from "../res/texts";
 import ListedQuestion from "./ListedQuestion";
 import { prepareQuestion } from "../utils/helpers";
 
 class List extends Component {
     state = {
+        forceLogin: false,
         showAlreadyAnswered: false
     };
+
+    componentDidMount() {
+        this.checkIfLoginNeeded(this.props.authedUser);
+    }
+
+    componentWillReceiveProps(props) {
+        this.checkIfLoginNeeded(props.authedUser);
+    }
+
+    checkIfLoginNeeded(authedUser) {
+        if(!authedUser) {
+            this.setState(prev => ({
+                forceLogin: true
+            }));
+        }
+    }
 
     pollClick = (id) => {
         //TODO: REDIRECT TO POLL
@@ -22,6 +40,12 @@ class List extends Component {
     };
 
     render() {
+        if(this.state.forceLogin) {
+            return (
+                <Redirect to='/' />
+            );
+        }
+
         return (
             <div>
                 <button onClick={this.toggleView}>

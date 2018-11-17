@@ -156,7 +156,7 @@ export function _saveQuestion (question) {
             questions = {
                 ...questions,
                 [formattedQuestion.id]: formattedQuestion
-            }
+            };
 
             users = {
                 ...users,
@@ -164,7 +164,7 @@ export function _saveQuestion (question) {
                     ...users[authedUser],
                     questions: users[authedUser].questions.concat([formattedQuestion.id])
                 }
-            }
+            };
 
             res(formattedQuestion)
         }, 1000)
