@@ -48,10 +48,12 @@ class List extends Component {
         }
 
         return (
-            <div className={`container ${styles.container}`}>
+            <div className={`container main-container ${styles.container}`}>
                 <div className='row'>
                     <div className='col-12'>
-                        <button onClick={this.toggleView}>
+                        <button
+                            onClick={this.toggleView}
+                            className={styles.button}>
                             {this.state.showAlreadyAnswered ? UNANSWERED : ANSWERED}
                         </button>
                     </div>
