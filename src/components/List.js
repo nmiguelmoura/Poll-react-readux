@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import {ANSWERED, UNANSWERED} from "../res/texts";
 import ListedQuestion from "./ListedQuestion";
 import { prepareQuestion } from "../utils/helpers";
+import styles from './List.module.css';
 
 class List extends Component {
     state = {
@@ -47,26 +48,30 @@ class List extends Component {
         }
 
         return (
-            <div>
-                <button onClick={this.toggleView}>
-                    {this.state.showAlreadyAnswered ? UNANSWERED : ANSWERED}
-                </button>
-                <ul>
-                    {this.props.questions.map(question => {
-                        if (question.alreadyAnswered === this.state.showAlreadyAnswered) {
-                            return (
-                                <li key={question.id}>
-                                    <ListedQuestion
-                                        question={question}
-                                        user={this.props.users[question.author]}
-                                        onPollClick={this.pollClick}
-                                    />
-                                </li>
-                            );
-                        }
-                        return null;
-                    })}
-                </ul>
+            <div className={`container ${styles.container}`}>
+                <div className='row'>
+                    <div className='col-12'>
+                        <button onClick={this.toggleView}>
+                            {this.state.showAlreadyAnswered ? UNANSWERED : ANSWERED}
+                        </button>
+                    </div>
+                    <ul className='col-12'>
+                        {this.props.questions.map(question => {
+                            if (question.alreadyAnswered === this.state.showAlreadyAnswered) {
+                                return (
+                                    <li key={question.id}>
+                                        <ListedQuestion
+                                            question={question}
+                                            user={this.props.users[question.author]}
+                                            onPollClick={this.pollClick}
+                                        />
+                                    </li>
+                                );
+                            }
+                            return null;
+                        })}
+                    </ul>
+                </div>
             </div>
         );
     }

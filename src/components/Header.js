@@ -13,32 +13,32 @@ class Header extends Component {
     render() {
         return (
             <header
-                className="container-fluid"
-                // style={{display: this.props.authedUser ? 'block' : 'none'}}
+                className={`container-fluid ${styles.header}`}
+                style={{display: this.props.authedUser ? 'block' : 'none'}}
             >
                 <nav className='row'>
                     <ul className='col-12'>
-                        <li>
-                            <NavLink to='/' exact activeClassName='active'>
+                        <li className={styles.li}>
+                            <NavLink to='/list' exact activeClassName='active'>
                                 {QUESTIONS}
                             </NavLink>
                         </li>
-                        <li>
+                        <li className={styles.li}>
                             <NavLink to='/new' activeClassName='active'>
                                 {NEW_QUESTION}
                             </NavLink>
                         </li>
-                        <li>
+                        <li className={styles.li}>
                             <NavLink to='/ranking' activeClassName='active'>
                                 {RANKING}
                             </NavLink>
                         </li>
-                        <li>
+                        <li className={`${styles.li} ${styles['li-right']}`}>
                             <button onClick={this.logout}>
                                 {LOGOUT}
                             </button>
                         </li>
-                        <li>
+                        <li className={`${styles.li} ${styles['li-right']} ${styles.author}`}>
                             {this.props.authedUser && (
                                 <img
                                     src={this.props.users[this.props.authedUser].avatarURL}

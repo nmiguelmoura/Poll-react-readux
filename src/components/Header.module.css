@@ -1,0 +1,27 @@
+.header {
+    background-color: white;
+    box-shadow: 0 1px 5px #444;
+    height: 50px;
+}
+
+.li {
+    float: left;
+    list-style: none;
+    font-size: 0.875rem;
+    margin-right: 10px;
+}
+
+.li-right {
+    float: right;
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.li a {
+    text-decoration: none;
+    color: var(--theme-color);
+}
+
+.author {
+
+}

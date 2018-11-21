@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { setAuthenticatedUser } from '../actions/authedUser';
+import styles from './Login.module.css';
 
 class Login extends Component {
 
@@ -32,20 +33,34 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <select value={this.state.selectedUser} onChange={this.onChange}>
-                    <option value='' disabled>Select a user</option>
-                    {this.props.users.map(user => (
-                        <option
-                            key={user.id}
-                            value={user.id}>
-                            {user.name}
-                        </option>
-                    ))}
-                </select>
-                <button onClick={this.onLogin}>
-                    Submit
-                </button>
+            <div className={`container ${styles.container}`}>
+                <div className='row'>
+                    <div className='col-12'>
+                        <h1>Would you rather</h1>
+                    </div>
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <select value={this.state.selectedUser} onChange={this.onChange}>
+                                    <option value='' disabled>Select a user</option>
+                                    {this.props.users.map(user => (
+                                        <option
+                                            key={user.id}
+                                            value={user.id}>
+                                            {user.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className='col-12'>
+                                <button onClick={this.onLogin}>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         );
     }
