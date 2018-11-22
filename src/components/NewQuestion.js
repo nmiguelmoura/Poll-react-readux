@@ -45,6 +45,7 @@ class NewQuestion extends Component {
                 optionTwoText: this.state.optionTwo,
                 author: this.props.authedUser
             }));
+            this.props.history.push('/list');
         } else {
 
         }

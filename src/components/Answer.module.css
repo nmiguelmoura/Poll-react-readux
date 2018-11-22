@@ -23,3 +23,13 @@
     background-color: var(--result-color);
     border-radius: 3px;
 }
+
+.answer img {
+    width: 36px;
+    height: 36px;
+    float: right;
+    margin-top: -40px;
+    margin-right: -14px;
+    border: 2px solid white;
+    border-radius: 100%;
+}

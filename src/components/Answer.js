@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import styles from "./Answer.module.css";
 
@@ -7,9 +7,12 @@ const Answer = (props) => {
         <div className={styles.answer}>
             <p>{props.text}</p>
             {props.alreadyAnswered &&
-            <p className={styles.result}>
-                <span className={styles['result-inner']} style={{'width': `${props.percentage}%`}}>{props.percentage}%</span>
-            </p>
+            <Fragment>
+                {props.avatarUrl && <img src={props.avatarUrl} alt={props.text}/>}
+                <p className={styles.result}>
+                    <span className={styles['result-inner']} style={{'width': `${props.percentage}%`}}>{props.percentage}%</span>
+                </p>
+            </Fragment>
             }
         </div>
     );
@@ -18,7 +21,8 @@ const Answer = (props) => {
 Answer.propTypes = {
     text: PropTypes.string.isRequired,
     percentage: PropTypes.number.isRequired,
-    alreadyAnswered: PropTypes.bool
+    alreadyAnswered: PropTypes.bool,
+    avatarUrl: PropTypes.string
 };
 
 export default Answer;

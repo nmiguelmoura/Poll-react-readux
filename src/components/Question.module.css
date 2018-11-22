@@ -1,4 +1,4 @@
-.unanswered img {
+.author img {
     display: block;
     width: 80px;
     height: 80px;
@@ -19,9 +19,9 @@
 
 }
 
-.unanswered h1,
-.answered h1,
-.unanswered h2 {
+.author h1,
+.author h1,
+.author h2 {
     font-weight: bold;
     font-size: 1rem;
     color: var(--font-color);
@@ -29,7 +29,7 @@
     margin-bottom: 20px;
 }
 
-.unanswered h2 {
+.author h2 {
     font-size: 0.875rem;
     margin-bottom: 40px;
 }

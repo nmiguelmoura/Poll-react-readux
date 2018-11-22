@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from "react-router-dom";
+import styles from './Ranking.module.css';
 
 class Ranking extends Component {
     state = {
@@ -31,23 +32,29 @@ class Ranking extends Component {
         }
 
         return (
-            <div>
+            <div className={`container main-container ${styles.container}`}>
                 <h1>LEADERBOARD</h1>
-                <ul>
+                <ul className='container'>
                     {this.props.users.map(user => {
                         const questions = user.questions.length;
                         const answers = Object.getOwnPropertyNames(user.answers).length;
                         const score = questions + answers;
                         return (
-                            <li key={user.id}>
-                                <img
-                                    src={user.avatarURL}
-                                    alt={user.name}/>
+                            <li
+                                className='row'
+                                key={user.id}>
+                                <div className='col-4'>
+                                    <img
+                                        src={user.avatarURL}
+                                        alt={user.name}/>
 
-                                <p>{user.name}</p>
-                                <p>Questions: {questions}</p>
-                                <p>Answers: {answers}</p>
-                                <p>Score: {score}</p>
+                                </div>
+                                <div className='col-8'>
+                                    <p className={styles['user-name']}>{user.name}</p>
+                                    <p>Questions: {questions}</p>
+                                    <p>Answers: {answers}</p>
+                                    <p>Score: {score}</p>
+                                </div>
                             </li>
                         );
                     })}

@@ -59,15 +59,19 @@ class Question extends Component {
             userAnswer = user.answers[qid];
         }
 
+        const userAvatar = this.props.users[this.props.authedUser].avatarURL;
+
         return (
             <div className={`container main-container ${styles.container}`}>
+                <div className={styles.author}>
+                    <img src={this.props.users[this.props.authedUser].avatarURL} alt={this.props.users[this.props.authedUser].name} />
+
+                    <h1>{this.props.users[this.props.authedUser].name} wants to know!</h1>
+                    <h2>Would you rather...</h2>
+                </div>
+
                 {!question.alreadyAnswered && (
                     <div className={styles.unanswered}>
-
-                        <img src={this.props.users[this.props.authedUser].avatarURL} alt={this.props.users[this.props.authedUser].name} />
-
-                        <h1>{this.props.users[this.props.authedUser].name} wants to know!</h1>
-                        <h2>Would you rather...</h2>
 
                         <button onClick={() => {
                             this.onAnswer(question.id, QUESTION_OPTIONS.OPTION_ONE)
@@ -84,16 +88,18 @@ class Question extends Component {
 
                 {question.alreadyAnswered && (
                     <div className={styles.answered}>
-                        {userAnswer}
                         <Answer
                             text={question.optionOne.text}
                             percentage={question.optionOne.percentage}
-                            alreadyAnswered={true}/>
+                            alreadyAnswered={true}
+                            selected={userAnswer === 'optionOne'}
+                            avatarUrl={userAnswer === 'optionOne' ? userAvatar : ''}/>
 
                         <Answer
                             text={question.optionTwo.text}
                             percentage={question.optionTwo.percentage}
-                            alreadyAnswered={true}/>
+                            alreadyAnswered={true}
+                            avatarUrl={userAnswer === 'optionTwo' ? userAvatar : ''}/>
                     </div>
                 )}
             </div>
