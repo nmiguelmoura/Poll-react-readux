@@ -4,6 +4,8 @@ import {QUESTION_OPTIONS} from "../utils/constants";
 import {prepareQuestion} from "../utils/helpers";
 import { handleAddAnswer } from "../actions/questions";
 import {Redirect} from "react-router-dom";
+import styles from "./Question.module.css";
+import Answer from "./Answer";
 
 class Question extends Component {
     state = {
@@ -58,9 +60,15 @@ class Question extends Component {
         }
 
         return (
-            <div>
+            <div className={`container main-container ${styles.container}`}>
                 {!question.alreadyAnswered && (
-                    <div>
+                    <div className={styles.unanswered}>
+
+                        <img src={this.props.users[this.props.authedUser].avatarURL} alt={this.props.users[this.props.authedUser].name} />
+
+                        <h1>{this.props.users[this.props.authedUser].name} wants to know!</h1>
+                        <h2>Would you rather...</h2>
+
                         <button onClick={() => {
                             this.onAnswer(question.id, QUESTION_OPTIONS.OPTION_ONE)
                         }}>
@@ -75,16 +83,17 @@ class Question extends Component {
                 )}
 
                 {question.alreadyAnswered && (
-                    <div>
+                    <div className={styles.answered}>
                         {userAnswer}
-                        <div>
-                            <p>{question.optionOne.Text}</p>
-                            <p>{question.optionOne.percentage}</p>
-                        </div>
-                        <div>
-                            <p>{question.optionTwo.Text}</p>
-                            <p>{question.optionTwo.percentage}</p>
-                        </div>
+                        <Answer
+                            text={question.optionOne.text}
+                            percentage={question.optionOne.percentage}
+                            alreadyAnswered={true}/>
+
+                        <Answer
+                            text={question.optionTwo.text}
+                            percentage={question.optionTwo.percentage}
+                            alreadyAnswered={true}/>
                     </div>
                 )}
             </div>

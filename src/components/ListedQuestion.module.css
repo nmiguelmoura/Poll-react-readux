@@ -19,38 +19,12 @@
     line-height: 1.2rem;
 }
 
-.questions h3 {
+.questions h1 {
     font-weight: bold;
     font-size: 1rem;
     color: var(--font-color);
     padding: 20px 0 20px 0;
     text-align: center;
-}
-
-.question {
-    background-color: var(--theme-color);
-    color: white;
-    margin-bottom: 5px;
-    border-radius: 3px;
-    padding: 5px;
-    font-size: 0.875rem;
-    text-align: center;
-}
-
-.result {
-    margin-top: 5px;
-    text-align: left;
-    text-indent: 5px;
-    width: 100%;
-    border: 1px solid var(--result-color);
-    border-radius: 3px;
-}
-
-.result-inner {
-    display: block;
-    height: 100%;
-    background-color: var(--result-color);
-    border-radius: 3px;
 }
 
 .button {

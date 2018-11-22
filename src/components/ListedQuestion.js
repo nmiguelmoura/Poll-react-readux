@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ListedQuestion.module.css';
+import Answer from './Answer';
 
 const ListedQuestion = (props) => {
     const {question, user} = props;
@@ -16,24 +17,19 @@ const ListedQuestion = (props) => {
                 </div>
                 <div className={`col-8 ${styles.questions}`}>
                     <div>
-                        <h3>Would you rather...</h3>
+                        <h1>Would you rather...</h1>
                     </div>
-                    <div className={styles.question}>
-                        <p>{question.optionOne.text}</p>
-                        {question.alreadyAnswered &&
-                            <p className={styles.result}>
-                                <span className={styles['result-inner']} style={{'width': `${question.optionOne.percentage}%`}}>{question.optionOne.percentage}%</span>
-                            </p>
-                        }
-                    </div>
-                    <div className={styles.question}>
-                        <p>{question.optionTwo.text}</p>
-                        {question.alreadyAnswered &&
-                            <p className={styles.result}>
-                                <span className={styles['result-inner']} style={{'width': `${question.optionTwo.percentage}%`}}>{question.optionTwo.percentage}%</span>
-                            </p>
-                        }
-                    </div>
+
+                    <Answer
+                        text={question.optionOne.text}
+                        percentage={question.optionOne.percentage}
+                        alreadyAnswered={question.alreadyAnswered} />
+
+                    <Answer
+                        text={question.optionTwo.text}
+                        percentage={question.optionTwo.percentage}
+                        alreadyAnswered={question.alreadyAnswered} />
+
                 </div>
                 <div className='offset-4 col-8'>
                     <button

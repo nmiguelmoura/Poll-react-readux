@@ -1,0 +1,25 @@
+.answer {
+    background-color: var(--theme-color);
+    color: white;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.result {
+    margin-top: 5px;
+    text-align: left;
+    text-indent: 5px;
+    width: 100%;
+    border: 1px solid var(--result-color);
+    border-radius: 3px;
+}
+
+.result-inner {
+    display: block;
+    height: 100%;
+    background-color: var(--result-color);
+    border-radius: 3px;
+}
