@@ -32,4 +32,6 @@
     height: 44px;
     font-size: 0.875rem;
     color: var(--theme-color);
+    background-color: transparent;
+    border: none;
 }

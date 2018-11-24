@@ -47,6 +47,8 @@ class List extends Component {
             );
         }
 
+        let questionsDisplaying = 0;
+
         return (
             <div className={`container main-container ${styles.container}`}>
                 <div className='row'>
@@ -60,6 +62,7 @@ class List extends Component {
                     <ul className='col-12'>
                         {this.props.questions.map(question => {
                             if (question.alreadyAnswered === this.state.showAlreadyAnswered) {
+                                questionsDisplaying++;
                                 return (
                                     <li key={question.id}>
                                         <ListedQuestion
@@ -72,6 +75,10 @@ class List extends Component {
                             }
                             return null;
                         })}
+
+                        {questionsDisplaying === 0 && (
+                            <li className={styles['no-results']}>No questions to see here!</li>
+                        )}
                     </ul>
                 </div>
             </div>
@@ -85,6 +92,8 @@ function mapStateToProps({questions, authedUser, users}) {
         let question = questions[questionId];
         return prepareQuestion(question, authedUser);
     });
+
+    questions.sort((a, b) => b.timestamp - a.timestamp);
 
     return {
         authedUser,

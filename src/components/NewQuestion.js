@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {SUBMIT_QUESTION} from "../res/texts";
 import { handleAddQuestion } from "../actions/questions";
 import {Redirect} from "react-router-dom";
+import styles from './NewQuestion.module.css';
 
 class NewQuestion extends Component {
     state = {
@@ -59,21 +60,42 @@ class NewQuestion extends Component {
         }
 
         return(
-            <form>
-                <input
-                    type='text'
-                    name='optionOne'
-                    value={this.state.optionOne}
-                    onChange={this.onChange}/>
-                <input
-                    type='text'
-                    name='optionTwo'
-                    value={this.state.optionTwo}
-                    onChange={this.onChange}/>
-                <button onClick={this.submit}>
-                    { SUBMIT_QUESTION }
-                </button>
-            </form>
+            <div className={`container main-container`}>
+                <div className='row'>
+                    <div className='col-12'>
+                        <h1 className={styles.h1}>Would you rather...</h1>
+                    </div>
+                </div>
+                <form className='row'>
+                    <div className={`col-12 ${styles['form-group']}`}>
+                        <label htmlFor='optionOne'>
+                            Option One
+                        </label>
+                        <input
+                            type='text'
+                            name='optionOne'
+                            value={this.state.optionOne}
+                            onChange={this.onChange}/>
+                    </div>
+                    <div className={`col-12 ${styles['form-group']}`}>
+                        <label htmlFor='optionTwo'>
+                            Option Two
+                        </label>
+                        <input
+                            type='text'
+                            name='optionTwo'
+                            value={this.state.optionTwo}
+                            onChange={this.onChange}/>
+                    </div>
+                    <div className='col-12'>
+                        <button
+                            className={styles.button}
+                            onClick={this.submit}>
+                            { SUBMIT_QUESTION }
+                        </button>
+                    </div>
+                </form>
+            </div>
         );
     }
 }

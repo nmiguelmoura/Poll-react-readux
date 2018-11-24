@@ -24,3 +24,22 @@
     margin-top: 5px;
     text-align: center;
 }
+
+.results p {
+    margin-bottom: 3px;
+}
+
+.value {
+    text-align: right;
+    color: var(--theme-color);
+}
+
+.label,
+.value {
+    font-size: 0.875rem;
+}
+
+.score {
+    font-weight: bold;
+    font-size: 1rem;
+}

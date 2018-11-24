@@ -1,3 +1,5 @@
+import Alert from 'react-s-alert';
+
 export const checkIfAnswered = (question, authedUser) => {
     return question.optionOne.votes.find((userId) => userId === authedUser)
         || question.optionTwo.votes.find((userId) => userId === authedUser)
@@ -30,3 +32,12 @@ export const prepareQuestion = (question, authedUser) => {
     question.optionTwo.percentage = pollResults.optionTwo;
     return question;
 };
+
+export function dispatchAlert(type='error', message='An error occurred!') {
+    Alert[type](`${message}`, {
+        position: 'top-right',
+        effect: 'slide',
+        timeout: 2000,
+        offset: 0
+    });
+}

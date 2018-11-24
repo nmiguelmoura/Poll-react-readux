@@ -25,5 +25,7 @@
     font-size: 0.875rem;
     font-weight: bold;
     color: var(--theme-color);
+    background-color: transparent;
+    border: none;
 }
 

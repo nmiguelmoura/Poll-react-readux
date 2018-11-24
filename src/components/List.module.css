@@ -4,8 +4,15 @@
     color: var(--theme-color);
     font-size: 1rem;
     margin-bottom: 20px;
+    background-color: transparent;
+    border: none;
 }
 
 .container li {
     list-style: none;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 0.875rem;
 }

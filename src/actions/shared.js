@@ -1,6 +1,7 @@
 import * as API from '../utils/data';
 import { receiveUsers } from "./users";
 import { receiveQuestions } from "./questions";
+import {dispatchAlert} from "../utils/helpers";
 
 export const GET_INTIAL_DATA = 'GET_INITIAL_DATA';
 
@@ -14,6 +15,6 @@ export function handleInitialData() {
             dispatch(receiveUsers(users));
             dispatch(receiveQuestions(questions));
         })
-        .catch(e => console.log(e));
+        .catch(e => dispatchAlert());
     };
 }

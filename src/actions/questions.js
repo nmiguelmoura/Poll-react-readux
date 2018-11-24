@@ -1,5 +1,6 @@
 import * as API from '../utils/data';
 import {addUserAnswer, addUserQuestion, revertUserAnswer} from "./users";
+import {dispatchAlert} from "../utils/helpers";
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
@@ -29,7 +30,7 @@ export function handleAddQuestion(question) {
                 dispatch(addQuestion(formattedQuestion));
                 dispatch(addUserQuestion(formattedQuestion));
             })
-            .catch(e => console.log(e));
+            .catch(e => dispatchAlert());
     }
 }
 
@@ -74,6 +75,8 @@ export function handleAddAnswer({ authedUser, qid, answer }) {
                     userId: authedUser,
                     qid
                 }))
+
+                dispatchAlert();
             })
     }
 }

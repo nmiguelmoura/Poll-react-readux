@@ -9,10 +9,12 @@ class Login extends Component {
         selectedUser: ''
     };
 
-    componentWillReceiveProps(props) {
+    static getDerivedStateFromProps(props, state) {
         if(props.authedUser) {
-            this.props.history.push('/list');
+            props.history.push('/list');
         }
+
+        return state;
     }
 
     onLogin = (event) => {
@@ -33,7 +35,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className={`container ${styles.container}`}>
+            <div className={`container main-container ${styles.container}`}>
                 <div className='row'>
                     <div className='col-12'>
                         <h1>Would you rather</h1>

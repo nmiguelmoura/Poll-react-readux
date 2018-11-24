@@ -10,7 +10,8 @@ const Answer = (props) => {
             <Fragment>
                 {props.avatarUrl && <img src={props.avatarUrl} alt={props.text}/>}
                 <p className={styles.result}>
-                    <span className={styles['result-inner']} style={{'width': `${props.percentage}%`}}>{props.percentage}%</span>
+                    <span className={styles['result-bar']} style={{'width': `${props.percentage}%`}}></span>
+                    <span className={styles['result-value']}>{`${props.votes} vote(s) - ${props.percentage}`}%</span>
                 </p>
             </Fragment>
             }
@@ -20,6 +21,7 @@ const Answer = (props) => {
 
 Answer.propTypes = {
     text: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
     percentage: PropTypes.number.isRequired,
     alreadyAnswered: PropTypes.bool,
     avatarUrl: PropTypes.string

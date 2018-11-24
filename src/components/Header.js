@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import {NEW_QUESTION, QUESTIONS, RANKING, LOGOUT} from '../res/texts';
@@ -24,12 +24,12 @@ class Header extends Component {
                             </NavLink>
                         </li>
                         <li className={styles.li}>
-                            <NavLink to='/new' activeClassName='active'>
+                            <NavLink to='/add' activeClassName='active'>
                                 {NEW_QUESTION}
                             </NavLink>
                         </li>
                         <li className={styles.li}>
-                            <NavLink to='/ranking' activeClassName='active'>
+                            <NavLink to='/leaderboard' activeClassName='active'>
                                 {RANKING}
                             </NavLink>
                         </li>
@@ -40,9 +40,12 @@ class Header extends Component {
                         </li>
                         <li className={`${styles.li} ${styles['li-right']} ${styles.author}`}>
                             {this.props.authedUser && (
-                                <img
-                                    src={this.props.users[this.props.authedUser].avatarURL}
-                                    alt={this.props.users[this.props.authedUser].name}/>
+                                <Fragment>
+                                    <p>{this.props.users[this.props.authedUser].name}</p>
+                                    <img
+                                        src={this.props.users[this.props.authedUser].avatarURL}
+                                        alt={this.props.users[this.props.authedUser].name}/>
+                                </Fragment>
                             )}
                         </li>
                     </ul>

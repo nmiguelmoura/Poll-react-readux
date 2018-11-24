@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {QUESTION_OPTIONS} from "../utils/constants";
 import {prepareQuestion} from "../utils/helpers";
 import { handleAddAnswer } from "../actions/questions";
 import {Redirect} from "react-router-dom";
 import styles from "./Question.module.css";
 import Answer from "./Answer";
+import PageNotFound from "./PageNotFound";
 
 class Question extends Component {
     state = {
@@ -47,8 +49,14 @@ class Question extends Component {
 
         let question = this.props.questions[qid];
 
-        if(!question) {
+        if(!question && this.props.loading) {
             return(<div>LOADING</div>);
+        }
+
+        if(!question) {
+            return(
+                <PageNotFound />
+            )
         }
 
         question = prepareQuestion(question, this.props.authedUser);
@@ -90,6 +98,7 @@ class Question extends Component {
                     <div className={styles.answered}>
                         <Answer
                             text={question.optionOne.text}
+                            votes={question.optionOne.votes.length}
                             percentage={question.optionOne.percentage}
                             alreadyAnswered={true}
                             selected={userAnswer === 'optionOne'}
@@ -97,11 +106,16 @@ class Question extends Component {
 
                         <Answer
                             text={question.optionTwo.text}
+                            votes={question.optionTwo.votes.length}
                             percentage={question.optionTwo.percentage}
                             alreadyAnswered={true}
                             avatarUrl={userAnswer === 'optionTwo' ? userAvatar : ''}/>
                     </div>
                 )}
+
+                <div className={styles.back}>
+                    <Link to='/'>Back to Questions</Link>
+                </div>
             </div>
         );
     }

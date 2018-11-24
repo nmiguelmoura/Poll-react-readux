@@ -1,6 +1,6 @@
 .header {
     background-color: white;
-    box-shadow: 0 1px 5px #444;
+    box-shadow: 0 1px 2px #aaa;
     height: 50px;
 }
 
@@ -30,15 +30,32 @@
     font-size: 0.875rem;
     color: var(--theme-color);
     height: 100%;
+    background-color: transparent;
+    border: none;
 }
 
 .author {
-    width: 40px;
-    height: 40px;
+
+}
+
+.author p {
+    display: none;
+    float: left;
+    margin-right: 10px;
+    padding-top: 19px;
 }
 
 .author img {
     margin-top: 5px;
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
+    float: right;
+}
+
+@media screen and (min-width: 512px) {
+    .author p {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--theme-color);
+    }
 }

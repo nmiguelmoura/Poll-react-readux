@@ -22,11 +22,13 @@ const ListedQuestion = (props) => {
 
                     <Answer
                         text={question.optionOne.text}
+                        votes={question.optionOne.votes.length}
                         percentage={question.optionOne.percentage}
                         alreadyAnswered={question.alreadyAnswered} />
 
                     <Answer
                         text={question.optionTwo.text}
+                        votes={question.optionTwo.votes.length}
                         percentage={question.optionTwo.percentage}
                         alreadyAnswered={question.alreadyAnswered} />
 

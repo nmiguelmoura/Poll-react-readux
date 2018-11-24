@@ -54,6 +54,7 @@ a {
 
 .main-container {
     padding-top: 20px;
+    max-width: 500px !important;
 }
 
 .fade-appear,
