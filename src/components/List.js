@@ -43,7 +43,7 @@ class List extends Component {
     render() {
         if(this.state.forceLogin) {
             return (
-                <Redirect to='/' />
+                <Redirect to={{pathname: '/', state: {redirectUrl: this.props.location.pathname}}} />
             );
         }
 

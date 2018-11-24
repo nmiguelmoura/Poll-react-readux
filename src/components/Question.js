@@ -27,16 +27,16 @@ class Question extends Component {
             return(<div>Loading...</div>);
         }
 
+        if(!this.props.authedUser) {
+            return (
+                <Redirect to={{pathname: '/', state: {redirectUrl: this.props.location.pathname}}} />
+            );
+        }
+
         if(!question) {
             return(
                 <PageNotFound />
             )
-        }
-
-        if(!this.props.authedUser) {
-            return (
-                <Redirect to='/' />
-            );
         }
 
         question = prepareQuestion(question, this.props.authedUser);

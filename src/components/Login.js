@@ -6,12 +6,24 @@ import styles from './Login.module.css';
 class Login extends Component {
 
     state = {
-        selectedUser: ''
+        selectedUser: '',
+        redirectUrl: '/'
     };
 
     static getDerivedStateFromProps(props, state) {
+        if(props.location.state && props.location.state.redirectUrl) {
+            state = {
+                ...state,
+                redirectUrl: props.location.state.redirectUrl
+            }
+        }
+
         if(props.authedUser) {
-            props.history.push('/list');
+            props.history.push(state.redirectUrl);
+            state = {
+                ...state,
+                redirectUrl: '/'
+            };
         }
 
         return state;
