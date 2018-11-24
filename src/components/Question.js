@@ -10,26 +10,6 @@ import Answer from "./Answer";
 import PageNotFound from "./PageNotFound";
 
 class Question extends Component {
-    state = {
-        forceLogin: false
-    };
-
-    componentDidMount() {
-        this.checkIfLoginNeeded(this.props.authedUser);
-    }
-
-    componentWillReceiveProps(props) {
-        this.checkIfLoginNeeded(props.authedUser);
-    }
-
-    checkIfLoginNeeded(authedUser) {
-        if(!authedUser) {
-            this.setState(prev => ({
-                forceLogin: true
-            }));
-        }
-    }
-
     onAnswer = (qid, answer) => {
         this.props.dispatch(handleAddAnswer({
             authedUser: this.props.authedUser,
@@ -39,24 +19,24 @@ class Question extends Component {
     };
 
     render() {
-        if(this.state.forceLogin) {
-            return (
-                <Redirect to='/' />
-            );
-        }
-
         const qid = this.props.match.params.id;
 
         let question = this.props.questions[qid];
 
-        if(!question && this.props.loading) {
-            return(<div>LOADING</div>);
+        if(this.props.loading) {
+            return(<div>Loading...</div>);
         }
 
         if(!question) {
             return(
                 <PageNotFound />
             )
+        }
+
+        if(!this.props.authedUser) {
+            return (
+                <Redirect to='/' />
+            );
         }
 
         question = prepareQuestion(question, this.props.authedUser);
