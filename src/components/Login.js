@@ -7,7 +7,7 @@ class Login extends Component {
 
     state = {
         selectedUser: '',
-        redirectUrl: '/'
+        redirectUrl: '/list'
     };
 
     static getDerivedStateFromProps(props, state) {
@@ -22,7 +22,7 @@ class Login extends Component {
             props.history.push(state.redirectUrl);
             state = {
                 ...state,
-                redirectUrl: '/'
+                redirectUrl: '/list'
             };
         }
 

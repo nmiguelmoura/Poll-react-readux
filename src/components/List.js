@@ -29,8 +29,6 @@ class List extends Component {
     }
 
     pollClick = (id) => {
-        //TODO: REDIRECT TO POLL
-        console.log(id);
         this.props.history.push(`/question/${id}`);
     };
 
