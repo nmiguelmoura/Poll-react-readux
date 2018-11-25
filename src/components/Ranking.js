@@ -6,10 +6,11 @@ import styles from './Ranking.module.css';
 class Ranking extends Component {
     state = {
         forceLogin: false,
+        userAlreadyAuthed: false
     };
 
     componentDidMount() {
-        this.checkIfLoginNeeded(this.props.authedUser);
+        this.checkIfLoginNeeded(this.props.authedUser, false);
     }
 
     componentWillReceiveProps(props) {
@@ -21,13 +22,17 @@ class Ranking extends Component {
             this.setState(prev => ({
                 forceLogin: true
             }));
+        } else {
+            this.setState(prev => ({
+                userAlreadyAuthed: true
+            }));
         }
     }
 
     render() {
         if(this.state.forceLogin) {
             return (
-                <Redirect to={{pathname: '/', state: {redirectUrl: this.props.location.pathname}}} />
+                <Redirect to={{pathname: '/', state: this.state.userAlreadyAuthed ? {} : {redirectUrl: this.props.location.pathname}}} />
             );
         }
 

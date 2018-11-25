@@ -9,7 +9,8 @@ import styles from './List.module.css';
 class List extends Component {
     state = {
         forceLogin: false,
-        showAlreadyAnswered: false
+        showAlreadyAnswered: false,
+        userAlreadyAuthed: false
     };
 
     componentDidMount() {
@@ -24,6 +25,10 @@ class List extends Component {
         if(!authedUser) {
             this.setState(prev => ({
                 forceLogin: true
+            }));
+        } else {
+            this.setState(prev => ({
+                userAlreadyAuthed: true
             }));
         }
     }
@@ -41,7 +46,7 @@ class List extends Component {
     render() {
         if(this.state.forceLogin) {
             return (
-                <Redirect to={{pathname: '/', state: {redirectUrl: this.props.location.pathname}}} />
+                <Redirect to={{pathname: '/', state: this.state.userAlreadyAuthed ? {} : {redirectUrl: this.props.location.pathname}}} />
             );
         }
 

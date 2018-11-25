@@ -10,6 +10,26 @@ import Answer from "./Answer";
 import PageNotFound from "./PageNotFound";
 
 class Question extends Component {
+    state = {
+        userAlreadyAuthed: false
+    };
+
+    componentDidMount() {
+        if(this.props.authedUser) {
+            this.setState(prev => ({
+                userAlreadyAuthed: true
+            }));
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        if(this.props.authedUser) {
+            this.setState(prev => ({
+                userAlreadyAuthed: true
+            }));
+        }
+    }
+
     onAnswer = (qid, answer) => {
         this.props.dispatch(handleAddAnswer({
             authedUser: this.props.authedUser,
@@ -29,7 +49,7 @@ class Question extends Component {
 
         if(!this.props.authedUser) {
             return (
-                <Redirect to={{pathname: '/', state: {redirectUrl: this.props.location.pathname}}} />
+                <Redirect to={{pathname: '/', state: this.state.userAlreadyAuthed ? {} : {redirectUrl: this.props.location.pathname}}} />
             );
         }
 

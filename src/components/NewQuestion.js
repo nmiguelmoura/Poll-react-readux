@@ -9,7 +9,8 @@ class NewQuestion extends Component {
     state = {
         forceLogin: false,
         optionOne: '',
-        optionTwo: ''
+        optionTwo: '',
+        userAlreadyAuthed: false
     };
 
     componentDidMount() {
@@ -24,6 +25,10 @@ class NewQuestion extends Component {
         if(!authedUser) {
             this.setState(prev => ({
                 forceLogin: true
+            }));
+        } else {
+            this.setState(prev => ({
+                userAlreadyAuthed: true
             }));
         }
     }
@@ -55,7 +60,7 @@ class NewQuestion extends Component {
     render() {
         if(this.state.forceLogin) {
             return (
-                <Redirect to={{pathname: '/', state: {redirectUrl: this.props.location.pathname}}} />
+                <Redirect to={{pathname: '/', state: this.state.userAlreadyAuthed ? {} : {redirectUrl: this.props.location.pathname}}} />
             );
         }
 

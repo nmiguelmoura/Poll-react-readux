@@ -11,6 +11,10 @@ class Login extends Component {
     };
 
     static getDerivedStateFromProps(props, state) {
+
+        console.log('-> ', props.location.state);
+
+
         if(props.location.state && props.location.state.redirectUrl) {
             state = {
                 ...state,
@@ -19,7 +23,13 @@ class Login extends Component {
         }
 
         if(props.authedUser) {
+            props.history.replace({
+                pathname: props.history.location.pathname,
+                state: {}
+            });
+            
             props.history.push(state.redirectUrl);
+
             state = {
                 ...state,
                 redirectUrl: '/list'
