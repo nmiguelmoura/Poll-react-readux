@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Setup project
+## Setup project:
 
 To start working on the project install all modules:
 
